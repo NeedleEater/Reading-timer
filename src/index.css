@@ -1,0 +1,187 @@
+:root {
+  /* Dark Mode (Default) */
+  --bg-color: #0a0a0a;
+  --text-color: #f0f0f0;
+  --accent-neon: #00ffcc;
+  --accent-neon-glow: rgba(0, 255, 204, 0.5);
+  --noir-bg: #1a1a1a;
+  --noir-text: #888;
+  --noir-accent: #333;
+  --noir-glow: rgba(255, 255, 255, 0.05);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.05);
+  --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --transition-speed: 0.4s;
+}
+
+[data-theme="light"] {
+  --bg-color: #f5f5f7;
+  --text-color: #1a1a1a;
+  --accent-neon: #00b38f; /* Slightly deeper for light mode contrast */
+  --accent-neon-glow: rgba(0, 179, 143, 0.3);
+  --card-bg: rgba(0, 0, 0, 0.03);
+  --card-border: rgba(0, 0, 0, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* Subtle dark gradient and noise texture */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.2) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="light"] body::before {
+  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.05) 100%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#root {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  outline: none;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+/* Active State Vignette & Grain (Noir) */
+body.active-timer::before {
+  background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.8) 100%) !important;
+}
+
+body.active-timer::after {
+  opacity: 0.15;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.0000000000000000000000002rem 0.0000000000000000000000005rem;
+}
+
+.nav-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.nav-link:hover {
+  opacity: 0.8;
+  color: var(--accent-neon);
+}
+
+.nav-link.active {
+  opacity: 1;
+  color: var(--accent-neon);
+  border-color: var(--accent-neon);
+  background: rgba(0, 255, 204, 0.08);
+  box-shadow: 0 0 10px var(--accent-neon-glow);
+}
+
+[data-theme="light"] .nav-link.active {
+  background: rgba(0, 179, 143, 0.1);
+  color: var(--accent-neon);
+  border-color: var(--accent-neon);
+  box-shadow: 0 0 10px rgba(0, 179, 143, 0.2);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  opacity: 0.4;
+  transition: all 0.3s;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+}
+
+.theme-toggle:hover {
+  opacity: 1;
+  border-color: var(--accent-neon);
+  color: var(--accent-neon);
+  box-shadow: 0 0 10px var(--accent-neon-glow);
+}
+
+/* Ensure readability during active timer (Noir state) */
+body.active-timer .nav-link {
+  opacity: 0.3;
+}
+
+body.active-timer .nav-link.active {
+  opacity: 1;
+  color: #fff;
+  border-color: #444;
+  background: rgba(255, 255, 255, 0.05);
+}

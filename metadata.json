@@ -1,0 +1,5 @@
+{
+  "name": "Neon Reading Log",
+  "description": "A production-quality reading session tracker with a Neon-to-Noir aesthetic, featuring a timer, calendar history, and CSV export.",
+  "requestFramePermissions": []
+}
